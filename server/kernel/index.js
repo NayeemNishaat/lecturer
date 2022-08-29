@@ -33,11 +33,7 @@ class Kernel {
     this.httpServer = http.createServer(this.app);
     this.httpServer.listen(process.env.PORT, null, () => {
       // TODO - load env from config
-      console.log(
-        'Express server listening on %d, in %s mode',
-        process.env.PORT,
-        process.env.NODE_ENV || 'development'
-      );
+      console.log('Express server listening on %d, in %s mode', process.env.PORT, process.env.NODE_ENV || 'development');
     });
   }
 
@@ -103,8 +99,7 @@ class Kernel {
   _modelLoader() {
     const db = {};
     Object.keys(this._modelSchemas).forEach(name => {
-      const schema =
-        typeof this._modelSchemas[name] === 'function' ? this._modelSchemas[name]() : this._modelSchemas[name];
+      const schema = typeof this._modelSchemas[name] === 'function' ? this._modelSchemas[name]() : this._modelSchemas[name];
 
       if (schema instanceof mongoose.Schema) {
         if (this._mongoosePlugins[name] && Array.isArray(this._mongoosePlugins[name])) {
